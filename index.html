@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>meu site❤️</title>
+<title>Vamos Voltar ❤️</title>
 
 <style>
 * {
@@ -13,145 +13,110 @@
     box-sizing: border-box;
 }
 
+html,
 body {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     background: #000;
+}
+
+body {
     font-family: Arial, sans-serif;
 }
 
+/* CANVAS DO CORAÇÃO */
 canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     display: block;
+    z-index: 1;
 }
 
-/* PALAVRAS FLUTUANTES */
-.palavra {
+/* CAMADA DAS PALAVRAS */
+#palavras {
     position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+    perspective: 1000px;
+}
+
+/* PALAVRAS */
+.palavra {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
     color: white;
     font-weight: bold;
-    font-size: 18px;
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 5px white,
+        0 0 10px #ff2f6d,
+        0 0 20px #ff2f6d,
+        0 0 35px #ff004c;
+
+    transform-origin: center center;
+
+    transition:
+        transform 0.15s linear,
+        opacity 0.15s linear;
+}
+
+/* FRASE PRINCIPAL */
+#principal {
+    font-size: clamp(20px, 5vw, 42px);
+    color: #fff;
     text-shadow:
         0 0 5px #fff,
-        0 0 10px #ff4d88,
-        0 0 20px #ff4d88;
-    pointer-events: none;
-    z-index: 10;
-    animation: flutuar 4s ease-in-out infinite;
-    opacity: 0;
-}
-
-@keyframes flutuar {
-    0% {
-        transform: translateY(20px) scale(0.8);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    50% {
-        transform: translateY(-20px) scale(1);
-        opacity: 1;
-    }
-
-    80% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-50px) scale(0.8);
-        opacity: 0;
-    }
-}
-
-/* POSIÇÕES */
-.p1 {
-    top: 15%;
-    left: 8%;
-    animation-delay: 0s;
-}
-
-.p2 {
-    top: 25%;
-    right: 8%;
-    animation-delay: 1s;
-}
-
-.p3 {
-    top: 45%;
-    left: 5%;
-    animation-delay: 2s;
-}
-
-.p4 {
-    top: 55%;
-    right: 5%;
-    animation-delay: 3s;
-}
-
-.p5 {
-    top: 70%;
-    left: 12%;
-    animation-delay: 1.5s;
-}
-
-.p6 {
-    top: 75%;
-    right: 12%;
-    animation-delay: 2.5s;
-}
-
-.p7 {
-    top: 10%;
-    left: 45%;
-    animation-delay: 0.7s;
-}
-
-.p8 {
-    top: 85%;
-    left: 43%;
-    animation-delay: 1.8s;
-}
-
-.p9 {
-    top: 38%;
-    left: 15%;
-    animation-delay: 2.2s;
-}
-
-.p10 {
-    top: 38%;
-    right: 15%;
-    animation-delay: 3.2s;
+        0 0 15px #ff174f,
+        0 0 30px #ff174f,
+        0 0 50px #ff174f;
 }
 
 /* TÍTULO */
 .titulo {
     position: fixed;
-    top: 5%;
+    top: 25px;
+    left: 0;
     width: 100%;
+
     text-align: center;
+
     color: white;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
-    z-index: 20;
+
+    z-index: 30;
+
     text-shadow:
-        0 0 10px #ff4d88,
-        0 0 25px #ff4d88;
+        0 0 10px #ff174f,
+        0 0 25px #ff174f;
 }
 
-/* FRASE INFERIOR */
+/* FRASE EMBAIXO */
 .frase {
     position: fixed;
-    bottom: 5%;
+    bottom: 25px;
+    left: 0;
     width: 100%;
+
     text-align: center;
+
     color: white;
-    font-size: 18px;
-    z-index: 20;
+    font-size: 17px;
+
+    z-index: 30;
+
     text-shadow:
-        0 0 8px #ff4d88,
-        0 0 15px #ff4d88;
+        0 0 8px #ff174f,
+        0 0 20px #ff174f;
 }
 </style>
 </head>
@@ -162,17 +127,50 @@ canvas {
     ❤️
 </div>
 
-<!-- PALAVRAS -->
-<div class="palavra p1">VAMOS VOLTAR!!!</div>
-<div class="palavra p2">AMOR</div>
-<div class="palavra p3">MEU AMORZINHO</div>
-<div class="palavra p4">SAUDADE</div>
-<div class="palavra p5">VOCÊ</div>
-<div class="palavra p6">SEMPRE</div>
-<div class="palavra p7">EU TE AMO</div>
-<div class="palavra p8">❤️</div>
-<div class="palavra p9">MEU BEM</div>
-<div class="palavra p10">PARA SEMPRE</div>
+<!-- PALAVRAS QUE VÃO ORBITAR -->
+<div id="palavras">
+
+    <div class="palavra" id="principal">
+        VAMOS VOLTAR!!!
+    </div>
+
+    <div class="palavra">
+        AMOR
+    </div>
+
+    <div class="palavra">
+        MORIN
+    </div>
+
+    <div class="palavra">
+        SAUDADE
+    </div>
+
+    <div class="palavra">
+        VOCÊ
+    </div>
+
+    <div class="palavra">
+        SEMPRE
+    </div>
+
+    <div class="palavra">
+        EU TE AMO
+    </div>
+
+    <div class="palavra">
+        ❤️
+    </div>
+
+    <div class="palavra">
+        MEU BEM
+    </div>
+
+    <div class="palavra">
+        PARA SEMPRE
+    </div>
+
+</div>
 
 <div class="frase">
     ❤️ VAMOS VOLTAR!!! ❤️
@@ -182,14 +180,19 @@ canvas {
 
 <script>
 
-/* =========================
+/* ==================================================
    CENA
-========================= */
+================================================== */
 
 const scene = new THREE.Scene();
 
+
+/* ==================================================
+   CÂMERA
+================================================== */
+
 const camera = new THREE.PerspectiveCamera(
-    75,
+    70,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
@@ -198,105 +201,121 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.z = 30;
 
 
-/* =========================
+/* ==================================================
    RENDERIZADOR
-========================= */
+================================================== */
 
 const renderer = new THREE.WebGLRenderer({
     antialias: true,
     alpha: true
 });
 
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+);
+
 renderer.setSize(
     window.innerWidth,
     window.innerHeight
 );
 
-renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio, 2)
+document.body.appendChild(
+    renderer.domElement
 );
 
-document.body.appendChild(renderer.domElement);
 
-
-/* =========================
+/* ==================================================
    GRUPO DO CORAÇÃO
-========================= */
+================================================== */
 
-const heartGroup = new THREE.Group();
+const heartGroup =
+    new THREE.Group();
 
-scene.add(heartGroup);
+scene.add(
+    heartGroup
+);
 
 
-/* =========================
+/* ==================================================
    CORAÇÃO DE PARTÍCULAS
-========================= */
+================================================== */
 
 const particleCount = 6000;
 
-const positions = new Float32Array(
-    particleCount * 3
-);
+const positions =
+    new Float32Array(
+        particleCount * 3
+    );
 
-const colors = new Float32Array(
-    particleCount * 3
-);
+const colors =
+    new Float32Array(
+        particleCount * 3
+    );
 
-for (let i = 0; i < particleCount; i++) {
+for (
+    let i = 0;
+    i < particleCount;
+    i++
+) {
 
     const t =
         Math.random() *
         Math.PI * 2;
 
-    const r =
-        Math.sqrt(Math.random());
+    const scale =
+        Math.sqrt(
+            Math.random()
+        );
 
     /*
-      Equação do coração
+       Fórmula do coração
     */
 
     const x =
         16 *
-        Math.pow(Math.sin(t), 3);
+        Math.pow(
+            Math.sin(t),
+            3
+        );
 
     const y =
-        13 * Math.cos(t)
-        - 5 * Math.cos(2 * t)
-        - 2 * Math.cos(3 * t)
+        13 *
+        Math.cos(t)
+        - 5 *
+        Math.cos(2 * t)
+        - 2 *
+        Math.cos(3 * t)
         - Math.cos(4 * t);
 
     const z =
-        (Math.random() - 0.5) * 4;
+        (Math.random() - 0.5) * 5;
 
-    const index = i * 3;
+    const index =
+        i * 3;
 
     positions[index] =
-        x * 0.65 * r;
+        x * 0.65 * scale;
 
     positions[index + 1] =
-        y * 0.65 * r;
+        y * 0.65 * scale;
 
     positions[index + 2] =
-        z * r;
-
-    /*
-      Cor das partículas
-    */
+        z * scale;
 
     colors[index] = 1;
-    colors[index + 1] = 0.15;
-    colors[index + 2] = 0.4;
+    colors[index + 1] = 0.08;
+    colors[index + 2] = 0.35;
 }
 
 
-/* =========================
+/* ==================================================
    GEOMETRIA
-========================= */
+================================================== */
 
-const heartGeo =
+const heartGeometry =
     new THREE.BufferGeometry();
 
-heartGeo.setAttribute(
+heartGeometry.setAttribute(
     "position",
     new THREE.BufferAttribute(
         positions,
@@ -304,7 +323,7 @@ heartGeo.setAttribute(
     )
 );
 
-heartGeo.setAttribute(
+heartGeometry.setAttribute(
     "color",
     new THREE.BufferAttribute(
         colors,
@@ -313,11 +332,11 @@ heartGeo.setAttribute(
 );
 
 
-/* =========================
+/* ==================================================
    MATERIAL
-========================= */
+================================================== */
 
-const heartMat =
+const heartMaterial =
     new THREE.PointsMaterial({
 
         size: 0.09,
@@ -335,22 +354,24 @@ const heartMat =
     });
 
 
-/* =========================
+/* ==================================================
    CORAÇÃO
-========================= */
+================================================== */
 
 const heart =
     new THREE.Points(
-        heartGeo,
-        heartMat
+        heartGeometry,
+        heartMaterial
     );
 
-heartGroup.add(heart);
+heartGroup.add(
+    heart
+);
 
 
-/* =========================
-   BRILHO CENTRAL
-========================= */
+/* ==================================================
+   BRILHO DO CORAÇÃO
+================================================== */
 
 const glowGeometry =
     new THREE.SphereGeometry(
@@ -361,9 +382,13 @@ const glowGeometry =
 
 const glowMaterial =
     new THREE.MeshBasicMaterial({
+
         color: 0xff174f,
+
         transparent: true,
-        opacity: 0.08,
+
+        opacity: 0.07,
+
         blending:
             THREE.AdditiveBlending
     });
@@ -374,12 +399,14 @@ const glow =
         glowMaterial
     );
 
-heartGroup.add(glow);
+heartGroup.add(
+    glow
+);
 
 
-/* =========================
+/* ==================================================
    PARTÍCULAS AO REDOR
-========================= */
+================================================== */
 
 const ambientCount = 1800;
 
@@ -394,7 +421,8 @@ for (
     i++
 ) {
 
-    const index = i * 3;
+    const index =
+        i * 3;
 
     ambientPositions[index] =
         (Math.random() - 0.5) * 60;
@@ -406,10 +434,10 @@ for (
         (Math.random() - 0.5) * 40;
 }
 
-const ambientGeo =
+const ambientGeometry =
     new THREE.BufferGeometry();
 
-ambientGeo.setAttribute(
+ambientGeometry.setAttribute(
     "position",
     new THREE.BufferAttribute(
         ambientPositions,
@@ -417,10 +445,10 @@ ambientGeo.setAttribute(
     )
 );
 
-const ambientMat =
+const ambientMaterial =
     new THREE.PointsMaterial({
 
-        color: 0xff4d88,
+        color: 0xff3366,
 
         size: 0.05,
 
@@ -436,31 +464,33 @@ const ambientMat =
 
 const ambient =
     new THREE.Points(
-        ambientGeo,
-        ambientMat
+        ambientGeometry,
+        ambientMaterial
     );
 
-scene.add(ambient);
+scene.add(
+    ambient
+);
 
 
-/* =========================
-   ANÉIS DE LUZ
-========================= */
+/* ==================================================
+   ANÉIS
+================================================== */
 
 for (
     let i = 0;
-    i < 18;
+    i < 15;
     i++
 ) {
 
-    const ringGeometry =
+    const geometry =
         new THREE.RingGeometry(
             9 + i * 0.7,
             9.03 + i * 0.7,
             128
         );
 
-    const ringMaterial =
+    const material =
         new THREE.MeshBasicMaterial({
 
             color: 0xff3366,
@@ -468,8 +498,7 @@ for (
             transparent: true,
 
             opacity:
-                0.08 -
-                i * 0.002,
+                0.07,
 
             side:
                 THREE.DoubleSide,
@@ -480,26 +509,88 @@ for (
 
     const ring =
         new THREE.Mesh(
-            ringGeometry,
-            ringMaterial
+            geometry,
+            material
         );
 
     ring.rotation.x =
         Math.PI / 2;
 
-    ring.position.y =
-        (Math.random() - 0.5) * 2;
-
-    scene.add(ring);
+    scene.add(
+        ring
+    );
 }
 
 
-/* =========================
+/* ==================================================
+   PALAVRAS 3D
+================================================== */
+
+const elementos =
+    document.querySelectorAll(
+        ".palavra"
+    );
+
+const palavras = [];
+
+
+/*
+   Distribuição inicial
+*/
+
+elementos.forEach(
+    (elemento, index) => {
+
+        const angle =
+            (index /
+            elementos.length) *
+            Math.PI * 2;
+
+        const radius =
+            180 +
+            Math.random() * 70;
+
+        const altura =
+            (Math.random() - 0.5) *
+            180;
+
+        palavras.push({
+
+            elemento:
+                elemento,
+
+            angle:
+                angle,
+
+            radius:
+                radius,
+
+            altura:
+                altura,
+
+            velocidade:
+                0.002 +
+                Math.random() *
+                0.003,
+
+            tamanho:
+                0.8 +
+                Math.random() *
+                0.5
+
+        });
+
+    }
+);
+
+
+/* ==================================================
    ANIMAÇÃO
-========================= */
+================================================== */
 
 const clock =
     new THREE.Clock();
+
 
 function animate() {
 
@@ -507,25 +598,32 @@ function animate() {
         animate
     );
 
-    const time =
+    const tempo =
         clock.getElapsedTime();
 
 
-    /* coração girando */
+    /* -------------------------------
+       CORAÇÃO
+    -------------------------------- */
 
     heartGroup.rotation.y =
-        time * 0.25;
+        tempo * 0.25;
 
     heartGroup.rotation.x =
-        Math.sin(time * 0.5) * 0.08;
+        Math.sin(
+            tempo * 0.5
+        ) * 0.08;
 
 
-    /* pulsação */
+    /* -------------------------------
+       PULSAÇÃO
+    -------------------------------- */
 
     const pulse =
         1 +
-        Math.sin(time * 3) *
-        0.05;
+        Math.sin(
+            tempo * 3
+        ) * 0.05;
 
     heartGroup.scale.set(
         pulse,
@@ -534,31 +632,38 @@ function animate() {
     );
 
 
-    /* brilho pulsando */
+    /* -------------------------------
+       BRILHO
+    -------------------------------- */
 
     glow.material.opacity =
         0.06 +
-        Math.sin(time * 3) *
-        0.025;
+        Math.sin(
+            tempo * 3
+        ) * 0.025;
 
 
-    /* partículas */
+    /* -------------------------------
+       PARTÍCULAS
+    -------------------------------- */
 
     ambient.rotation.y =
-        time * 0.015;
-
-    ambient.rotation.x =
-        Math.sin(time * 0.1) *
-        0.05;
+        tempo * 0.015;
 
 
-    /* câmera */
+    /* -------------------------------
+       CÂMERA
+    -------------------------------- */
 
     camera.position.x =
-        Math.sin(time * 0.15) * 2;
+        Math.sin(
+            tempo * 0.15
+        ) * 2;
 
     camera.position.y =
-        Math.cos(time * 0.15) * 1;
+        Math.cos(
+            tempo * 0.15
+        ) * 1;
 
     camera.lookAt(
         0,
@@ -567,18 +672,149 @@ function animate() {
     );
 
 
+    /* ==================================================
+       PALAVRAS ORBITANDO
+    ================================================== */
+
+    palavras.forEach(
+        (p, index) => {
+
+            p.angle +=
+                p.velocidade;
+
+
+            /*
+               Movimento circular
+            */
+
+            const x =
+                Math.cos(
+                    p.angle
+                ) *
+                p.radius;
+
+            const y =
+                p.altura +
+                Math.sin(
+                    tempo * 0.8 +
+                    index
+                ) * 35;
+
+            const z =
+                Math.sin(
+                    p.angle
+                ) *
+                p.radius;
+
+
+            /*
+               Converte posição 3D
+               para posição na tela
+            */
+
+            const vetor =
+                new THREE.Vector3(
+                    x,
+                    y,
+                    z
+                );
+
+            vetor.project(
+                camera
+            );
+
+
+            const screenX =
+                (vetor.x * 0.5 + 0.5) *
+                window.innerWidth;
+
+            const screenY =
+                (-vetor.y * 0.5 + 0.5) *
+                window.innerHeight;
+
+
+            /*
+               Profundidade
+            */
+
+            const profundidade =
+                (z + p.radius) /
+                (p.radius * 2);
+
+            let escala =
+                0.7 +
+                profundidade * 0.7;
+
+
+            /*
+               VAMOS VOLTAR
+               sempre maior
+            */
+
+            if (index === 0) {
+
+                escala *= 1.25;
+
+            }
+
+
+            /*
+               Opacidade baseada
+               na profundidade
+            */
+
+            let opacidade =
+                0.35 +
+                profundidade * 0.65;
+
+
+            /*
+               Mantém a frase visível
+            */
+
+            if (index === 0) {
+
+                opacidade = 1;
+
+            }
+
+
+            p.elemento.style.left =
+                screenX + "px";
+
+            p.elemento.style.top =
+                screenY + "px";
+
+            p.elemento.style.transform =
+                "translate(-50%, -50%) " +
+                "scale(" +
+                escala +
+                ")";
+
+            p.elemento.style.opacity =
+                opacidade;
+
+        }
+    );
+
+
+    /* -------------------------------
+       RENDER
+    -------------------------------- */
+
     renderer.render(
         scene,
         camera
     );
 }
 
+
 animate();
 
 
-/* =========================
+/* ==================================================
    RESPONSIVO
-========================= */
+================================================== */
 
 window.addEventListener(
     "resize",
@@ -602,3 +838,4 @@ window.addEventListener(
 
 </body>
 </html>
+
